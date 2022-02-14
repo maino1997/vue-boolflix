@@ -1,28 +1,47 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <Header @getEmitValue="getModelValue" />
+
+    <Main :filmList="filmList" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from "./components/Header.vue";
+import Main from "./components/Main.vue";
+import axios from "axios";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    Header,
+    Main,
+  },
+  data() {
+    return {
+      filmList: [],
+      searchValue: "",
+    };
+  },
+
+  methods: {
+    getUrl(string) {
+      axios
+        .get(
+          `https://api.themoviedb.org/3/search/tv?api_key=e99307154c6dfb0b4750f6603256716d&language=it_IT&query=${string}`
+        )
+        .then((res) => {
+          this.filmList = res.data.results;
+        });
+    },
+    getModelValue(value) {
+      this.searchValue = value;
+      this.getUrl(this.searchValue);
+    },
+  },
+};
 </script>
 
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
