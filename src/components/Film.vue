@@ -1,10 +1,9 @@
 <template>
   <ul>
-    <li>FILM</li>
+    <li>{{ compTitle }}</li>
     <li v-for="film in List" :key="film.id">
-      {{ film.title }}
+      {{ getTitle(film) }}
       {{ film.original_title }}
-      {{ film.original_language }}
       <img
         :src="getFlagUrl(film.original_language)"
         :alt="film.original_language"
@@ -17,7 +16,7 @@
 <script>
 export default {
   name: "Film",
-  props: ["List"],
+  props: ["List", "compTitle"],
   methods: {
     getFlagUrl(flag) {
       if (flag === "en") {
@@ -26,6 +25,20 @@ export default {
         return require("../assets/img/it.png");
       } else {
         return "https://developers.google.com/maps/documentation/streetview/images/error-image-generic.png";
+      }
+    },
+    getTitle(title) {
+      if (title.title) {
+        return title.title;
+      } else {
+        return title.name;
+      }
+    },
+    getOrigTitle(title) {
+      if (title.title) {
+        return title.original_title;
+      } else {
+        return title.original_name;
       }
     },
   },

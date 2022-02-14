@@ -2,14 +2,13 @@
   <div>
     <Header @getEmitValue="getModelValue" />
 
-    <Tv :List="tvList" />
-    <Film :List="filmList" />
+    <Film :List="filmList" compTitle="FILM" />
+    <Film :List="tvList" compTitle="SERIE TV" />
   </div>
 </template>
 
 <script>
 import Header from "./components/Header.vue";
-import Tv from "./components/Tv.vue";
 import Film from "./components/Film.vue";
 import axios from "axios";
 
@@ -17,7 +16,7 @@ export default {
   name: "App",
   components: {
     Header,
-    Tv,
+
     Film,
   },
   data() {
