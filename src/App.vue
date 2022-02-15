@@ -1,9 +1,14 @@
 <template>
-  <div class="container">
+  <div>
     <Header @getEmitValue="getModelValue" />
-    <main>
-      <Film :List="filmList" compTitle="FILM" />
-      <Film :List="tvList" compTitle="SERIE TV" />
+    <main class="text-center text-white">
+      <div class="container">
+        <h2 id="loader-title" v-if="tvList.length === 0">
+          CERCA UN FILM O UNA SERIE TV
+        </h2>
+        <Film :List="filmList" compTitle="FILM" v-if="filmList.length > 0" />
+        <Film :List="tvList" compTitle="SERIE TV" v-if="tvList.length > 0" />
+      </div>
     </main>
   </div>
 </template>
@@ -65,4 +70,13 @@ export default {
 
 <style lang="scss">
 @import "./sass/style.scss";
+main {
+  background-color: rgb(26, 25, 25);
+  height: calc(100vh - 70px);
+  overflow-y: auto;
+}
+
+#loader-title {
+  margin-top: 200px;
+}
 </style>

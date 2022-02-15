@@ -16,12 +16,6 @@ export default {
   components: {
     Card,
   },
-
-  data() {
-    return {
-      rateValue: 0,
-    };
-  },
 };
 </script>
 
