@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <Header @getEmitValue="getModelValue" />
     <main>
       <Film :List="filmList" compTitle="FILM" />
@@ -64,4 +64,5 @@ export default {
 
 
 <style lang="scss">
+@import "./sass/style.scss";
 </style>
