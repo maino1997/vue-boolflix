@@ -1,7 +1,7 @@
 <template>
   <section>
     <h2>{{ compTitle }}</h2>
-    <ul class="row px-4">
+    <ul class="row g-4">
       <Card v-for="film in List" :key="film.id" :List="List" :film="film" />
     </ul>
   </section>

@@ -1,36 +1,30 @@
 <template>
-  <li class="col-6 col-md-4 col-lg-2 cards">
+  <li class="col-6 col-md-4 col-lg-3 col-xl-2 cards overflow">
     <div
       class="content"
       :style="{
         backgroundImage: getBackgroundPicture(film.poster_path),
       }"
     >
-      <div
-        class="description"
-        v-if="visible"
-        @mouseover="Visible"
-        @mouseleave="notVisible"
-      >
+      <div class="description">
         <ul>
           <li>
-            Titolo:
+            TITOLO:
             {{ getTitle(film) }}
           </li>
           <li>
-            Titolo Originale:
+            TITOLO ORIGINALE:
             {{ film.original_title }}
           </li>
           <li>
-            Lingua Originale:
+            LINGUA ORIGINALE:
             <img
               :src="getFlagUrl(film.original_language)"
               :alt="film.original_language"
             />
           </li>
           <li>
-            Voto:
-            {{ film.vote_average }}
+            VOTO:
             <i
               v-for="number in 5"
               :key="number"
@@ -39,7 +33,7 @@
             ></i>
           </li>
           <li>
-            Trama:
+            TRAMA:
             {{ film.overview }}
           </li>
         </ul>
@@ -88,19 +82,11 @@ export default {
     },
 
     getBackgroundPicture(path) {
-      if (this.visible) {
-        if (path) {
-          return `url(https://image.tmdb.org/t/p/w342${path})`;
-        } else {
-          return "`url(https://www.mobileworld.it/wp-content/uploads/2016/06/netflix-nuova-icona-800x534.png)`";
-        }
+      if (path && this.visible === false) {
+        return `url(https://image.tmdb.org/t/p/w342${path})`;
+      } else {
+        return `url(https://www.mobileworld.it/wp-content/uploads/2016/06/netflix-nuova-icona-800x534.png)`;
       }
-    },
-    Visible() {
-      this.visible = true;
-    },
-    notVisible() {
-      this.visible = false;
     },
   },
 };
@@ -109,9 +95,7 @@ export default {
 <style lang="scss" scoped>
 .cards {
   height: 300px;
-  overflow: auto;
-  //   width: calc(100% / 6);
-  margin: 30px 0;
+  margin: 20px 0;
 }
 img {
   width: 50px;
@@ -130,6 +114,27 @@ img {
   background-size: cover;
   background-position: center;
   border: 1px solid rgb(185, 182, 182);
-  border-radius: 10px;
+  border-radius: 5px;
+  overflow-y: auto;
+  box-shadow: 0 0px 7px white;
+  position: relative;
+}
+
+.description {
+  background-color: rgb(26, 25, 25);
+  display: none;
+  min-height: 300px;
+  padding: 10px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  li {
+    margin: 20px 0;
+  }
+}
+.content:hover .description {
+  display: block;
+  cursor: pointer;
 }
 </style>

@@ -28,40 +28,40 @@ export default {
     return {
       tvList: [],
       filmList: [],
-      searchValue: "",
+      api: {
+        language: "it-IT",
+        baseUri: "https://api.themoviedb.org/3/",
+        key: "e99307154c6dfb0b4750f6603256716d",
+      },
     };
   },
 
   methods: {
-    getTvUrl(string) {
-      axios
-        .get(
-          `https://api.themoviedb.org/3/search/tv?api_key=e99307154c6dfb0b4750f6603256716d&language=it_IT&query=${string}`
-        )
-        .then((res) => {
-          this.tvList = res.data.results;
-        });
-    },
-
-    getFilmUrl(string) {
-      axios
-        .get(
-          `https://api.themoviedb.org/3/search/movie?api_key=e99307154c6dfb0b4750f6603256716d&language=it_IT&query=${string}`
-        )
-        .then((res) => {
-          this.filmList = res.data.results;
-        });
+    getProduct(endPoint, config, list) {
+      axios.get(`${this.api.baseUri}${endPoint}`, config).then((res) => {
+        this[list] = res.data.results;
+      });
     },
 
     getModelValue(value) {
-      this.searchValue = value;
       if (!value) {
         this.tvList = [];
         this.filmList = [];
         return;
       }
-      this.getTvUrl(value);
-      this.getFilmUrl(value);
+
+      const { key, language } = this.api;
+
+      const config = {
+        params: {
+          language,
+          api_key: key,
+          query: value,
+        },
+      };
+
+      this.getProduct("search/tv", config, "tvList");
+      this.getProduct("search/movie", config, "filmList");
     },
   },
 };
