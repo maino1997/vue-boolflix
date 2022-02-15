@@ -1,7 +1,7 @@
 <template>
   <header>
-    <input type="text" v-model="value" />
-    <button @keyup.enter="getValue">CERCA</button>
+    <input type="text" v-model.trim="value" @keyup.enter="getValue" />
+    <button @click="getValue">CERCA</button>
   </header>
 </template>
 

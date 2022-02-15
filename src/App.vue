@@ -1,9 +1,10 @@
 <template>
   <div>
     <Header @getEmitValue="getModelValue" />
-
-    <Film :List="filmList" compTitle="FILM" />
-    <Film :List="tvList" compTitle="SERIE TV" />
+    <main>
+      <Film :List="filmList" compTitle="FILM" />
+      <Film :List="tvList" compTitle="SERIE TV" />
+    </main>
   </div>
 </template>
 
@@ -16,7 +17,6 @@ export default {
   name: "App",
   components: {
     Header,
-
     Film,
   },
   data() {
@@ -50,6 +50,11 @@ export default {
 
     getModelValue(value) {
       this.searchValue = value;
+      if (!value) {
+        this.tvList = [];
+        this.filmList = [];
+        return;
+      }
       this.getTvUrl(value);
       this.getFilmUrl(value);
     },
