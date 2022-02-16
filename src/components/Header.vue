@@ -5,13 +5,19 @@
         src="https://www.edigitalagency.com.au/wp-content/uploads/Netflix-logo-red-black-png.png"
         alt="logo-netflix"
       />
-      <select v-model="genreValue" @change="getSelectValue">
-        <option value="">FILTRA PER GENERE</option>
-        <option v-for="genre in genreList" :key="genre.id" :value="genre.id">
-          {{ genre.name }}
-        </option>
-      </select>
-      <Search @getEmitValue="getValue" />
+      <div class="search-block">
+        <select v-model="genreValue" @change="getSelectValue">
+          <option value="">FILTRA PER GENERE</option>
+          <option
+            v-for="(genre, index) in genreList"
+            :key="index"
+            :value="genre.id"
+          >
+            {{ genre.name }}
+          </option>
+        </select>
+        <Search @getEmitValue="getValue" />
+      </div>
     </div>
   </header>
 </template>
@@ -53,5 +59,15 @@ header {
 img {
   width: 200px;
   height: 90px;
+}
+
+.search-block {
+  display: flex;
+  select {
+    border-radius: 5px;
+    padding: 7px;
+    cursor: pointer;
+    margin-right: 15px;
+  }
 }
 </style>

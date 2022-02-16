@@ -30,6 +30,7 @@ export default {
 input {
   height: 40px;
   padding: 10px;
+  cursor: pointer;
 }
 
 button {

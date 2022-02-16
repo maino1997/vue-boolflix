@@ -41,9 +41,15 @@
           </li>
           <li>
             CAST:
-            <span v-for="actor in castList" :key="actor.name">{{
-              actor.name
-            }}</span>
+            <div v-for="actor in castList" :key="actor.name">
+              {{ actor.name }}
+            </div>
+          </li>
+          <li>
+            GENERI:
+            <div v-for="(genre, index) in genreList" :key="index">
+              {{ genName(genre) }}
+            </div>
           </li>
         </ul>
       </div>
@@ -55,7 +61,7 @@
 import axios from "axios";
 export default {
   name: "Card",
-  props: ["List", "film", "filmId"],
+  props: ["List", "film", "filmId", "genreList"],
   data() {
     return {
       visible: false,
@@ -66,6 +72,15 @@ export default {
   computed: {},
 
   methods: {
+    genName(genre) {
+      for (let i = 0; i < this.film.genre_ids.length; i++) {
+        if (this.genreList.includes(this.film.genre_ids[i])) {
+          return genre.name;
+        } else {
+          return;
+        }
+      }
+    },
     getTitle(title) {
       if (title.title) {
         return title.title;

@@ -11,15 +11,17 @@
           CERCA UN FILM O UNA SERIE TV
         </h2>
         <Film
-          :List="filmList"
           compTitle="FILM"
+          :List="filmList"
+          :genreList="genreList"
           v-if="filmList.length"
           @getId="getId"
           :selectValue="selectValue"
         />
         <Film
-          :List="tvList"
           compTitle="SERIE TV"
+          :List="tvList"
+          :genreList="genreList"
           v-if="tvList.length > 0"
           :selectValue="selectValue"
         />
@@ -47,6 +49,7 @@ export default {
       filmList: [],
       idList: [],
       genreList: [],
+      genreIds: [],
       movieId: undefined,
       api: {
         language: "it-IT",
@@ -113,6 +116,24 @@ export default {
       )
       .then((res) => {
         this["genreList"] = res.data.genres;
+        const genreMovieList = res.data.genres;
+        genreMovieList.forEach((movieGen) => {
+          this.genreIds.push(movieGen.id);
+        });
+      });
+
+    axios
+      .get(
+        `https://api.themoviedb.org/3/genre/tv/list?api_key=e99307154c6dfb0b4750f6603256716d&language=it-IT`
+      )
+      .then((res) => {
+        const genreTvList = res.data.genres;
+        genreTvList.forEach((tvGen) => {
+          if (!this.genreIds.includes(tvGen.id)) {
+            this.genreList.push(tvGen);
+          }
+          console.log(tvGen.id);
+        });
       });
   },
 };
