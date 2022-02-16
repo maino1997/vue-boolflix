@@ -39,6 +39,12 @@
             TRAMA:
             {{ film.overview }}
           </li>
+          <li>
+            CAST:
+            <span v-for="actor in castList" :key="actor.name">{{
+              actor.name
+            }}</span>
+          </li>
         </ul>
       </div>
     </div>
@@ -46,13 +52,14 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "Card",
-  props: ["List", "film"],
+  props: ["List", "film", "filmId"],
   data() {
     return {
       visible: false,
-      filmIds: [],
+      castList: [],
     };
   },
 
@@ -98,6 +105,24 @@ export default {
         return `url(https://www.mobileworld.it/wp-content/uploads/2016/06/netflix-nuova-icona-800x534.png)`;
       }
     },
+    getCast() {
+      axios
+        .get(
+          `https://api.themoviedb.org/3/movie/${this.filmId}/credits?api_key=e99307154c6dfb0b4750f6603256716d`
+        )
+        .then((res) => {
+          for (let i = 0; i < 5; i++) {
+            const currentActor = res.data.cast[i];
+            if (currentActor) {
+              this.castList.push(currentActor);
+            }
+          }
+        });
+    },
+  },
+
+  mounted() {
+    this.getCast();
   },
 };
 </script>

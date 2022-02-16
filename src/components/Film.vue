@@ -3,11 +3,12 @@
     <h2>{{ compTitle }}</h2>
     <ul class="row g-4">
       <Card
-        v-for="film in NewArray"
+        v-for="film in newArray"
         :key="film.id"
         :List="List"
         :film="film"
         @click="getId(film.id)"
+        :filmId="film.id"
       />
     </ul>
   </section>
@@ -25,11 +26,10 @@ export default {
   data() {
     return {
       filmIds: [],
-      // selectValue: "ci",
     };
   },
   computed: {
-    NewArray() {
+    newArray() {
       // console.log(this.selectValue);
       const newArray = this.List.filter((film) => {
         if (film.genre_ids.includes(this.selectValue)) {

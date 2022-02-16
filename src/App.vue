@@ -60,11 +60,6 @@ export default {
     getProduct(endPoint, config, list) {
       axios.get(`${this.api.baseUri}${endPoint}`, config).then((res) => {
         this[list] = res.data.results;
-        // axios
-        //   .get(`${this.api.baseUri}movie/${this.movieId}/casts`, config)
-        //   .then((res) => {
-        //     res.data.results = this;
-        //   });
       });
     },
 
