@@ -2,7 +2,13 @@
   <section>
     <h2>{{ compTitle }}</h2>
     <ul class="row g-4">
-      <Card v-for="film in List" :key="film.id" :List="List" :film="film" />
+      <Card
+        v-for="film in NewArray"
+        :key="film.id"
+        :List="List"
+        :film="film"
+        @click="getId(film.id)"
+      />
     </ul>
   </section>
 </template>
@@ -12,9 +18,34 @@ import Card from "./Card.vue";
 
 export default {
   name: "Film",
-  props: ["List", "compTitle"],
+  props: ["List", "compTitle", "selectValue"],
   components: {
     Card,
+  },
+  data() {
+    return {
+      filmIds: [],
+      // selectValue: "ci",
+    };
+  },
+  computed: {
+    NewArray() {
+      // console.log(this.selectValue);
+      const newArray = this.List.filter((film) => {
+        if (film.genre_ids.includes(this.selectValue)) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      return newArray;
+    },
+  },
+  methods: {
+    getId(id) {
+      this.$emit("getId", id);
+      console.log(id);
+    },
   },
 };
 </script>

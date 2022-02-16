@@ -1,5 +1,8 @@
 <template>
-  <li class="col-6 col-md-4 col-lg-3 col-xl-2 cards overflow">
+  <li
+    class="col-6 col-md-4 col-lg-3 col-xl-2 cards overflow"
+    @click="getFilmId(film.id)"
+  >
     <div
       class="content"
       :style="{
@@ -49,10 +52,24 @@ export default {
   data() {
     return {
       visible: false,
+      filmIds: [],
     };
   },
 
+  computed: {},
+
   methods: {
+    getTitle(title) {
+      if (title.title) {
+        return title.title;
+      } else {
+        return title.name;
+      }
+    },
+    getFilmId(id) {
+      console.log(id);
+      this.$emit("getId", id);
+    },
     getFlagUrl(flag) {
       if (flag === "en") {
         return require("../assets/img/en.png");
@@ -60,13 +77,6 @@ export default {
         return require("../assets/img/it.png");
       } else {
         return "https://developers.google.com/maps/documentation/streetview/images/error-image-generic.png";
-      }
-    },
-    getTitle(title) {
-      if (title.title) {
-        return title.title;
-      } else {
-        return title.name;
       }
     },
     getOrigTitle(title) {
