@@ -157,7 +157,6 @@ img {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  border: 1px solid rgb(185, 182, 182);
   border-radius: 5px;
   overflow-y: auto;
   overflow-x: hidden;
@@ -174,6 +173,7 @@ img {
   left: 0;
   right: 0;
   top: 0;
+  border: 1px solid black;
   li {
     margin: 20px 0;
   }
