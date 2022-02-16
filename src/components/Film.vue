@@ -10,6 +10,7 @@
         @click="getId(film.id)"
         :filmId="film.id"
         :genreList="genreList"
+        :endP="endP"
       />
     </ul>
   </section>
@@ -20,7 +21,7 @@ import Card from "./Card.vue";
 
 export default {
   name: "Film",
-  props: ["List", "compTitle", "selectValue", "genreList"],
+  props: ["List", "compTitle", "selectValue", "genreList", "endP"],
   components: {
     Card,
   },

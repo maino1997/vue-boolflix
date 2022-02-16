@@ -17,6 +17,7 @@
           v-if="filmList.length"
           @getId="getId"
           :selectValue="selectValue"
+          endP="movie"
         />
         <Film
           compTitle="SERIE TV"
@@ -24,6 +25,7 @@
           :genreList="genreList"
           v-if="tvList.length > 0"
           :selectValue="selectValue"
+          endP="tv"
         />
       </div>
     </main>

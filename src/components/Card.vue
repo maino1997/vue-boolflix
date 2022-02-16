@@ -61,7 +61,7 @@
 import axios from "axios";
 export default {
   name: "Card",
-  props: ["List", "film", "filmId", "genreList"],
+  props: ["List", "film", "filmId", "genreList", "endP"],
   data() {
     return {
       visible: false,
@@ -73,13 +73,7 @@ export default {
 
   methods: {
     genName(genre) {
-      for (let i = 0; i < this.film.genre_ids.length; i++) {
-        if (this.genreList.includes(this.film.genre_ids[i])) {
-          return genre.name;
-        } else {
-          return;
-        }
-      }
+      if (this.film.genre_ids.includes(genre.id)) return genre.name;
     },
     getTitle(title) {
       if (title.title) {
@@ -120,10 +114,10 @@ export default {
         return `url(https://www.mobileworld.it/wp-content/uploads/2016/06/netflix-nuova-icona-800x534.png)`;
       }
     },
-    getCast() {
+    getCast(endP) {
       axios
         .get(
-          `https://api.themoviedb.org/3/movie/${this.filmId}/credits?api_key=e99307154c6dfb0b4750f6603256716d`
+          `https://api.themoviedb.org/3/${endP}/${this.filmId}/credits?api_key=e99307154c6dfb0b4750f6603256716d`
         )
         .then((res) => {
           for (let i = 0; i < 5; i++) {
@@ -137,7 +131,7 @@ export default {
   },
 
   mounted() {
-    this.getCast();
+    this.getCast(this.endP);
   },
 };
 </script>
@@ -166,6 +160,7 @@ img {
   border: 1px solid rgb(185, 182, 182);
   border-radius: 5px;
   overflow-y: auto;
+  overflow-x: hidden;
   box-shadow: 0 0px 7px white;
   position: relative;
 }
