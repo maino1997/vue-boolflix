@@ -15,7 +15,6 @@
           :List="filmList"
           :genreList="genreList"
           v-if="filmList.length"
-          @getId="getId"
           :selectValue="selectValue"
           endP="movie"
         />
@@ -102,10 +101,10 @@ export default {
     //   };
     // },
 
-    getId(id) {
-      this.movieId = id;
-      console.log(id);
-    },
+    // getId(id) {
+    //   this.movieId = id;
+    //   console.log(id);
+    // },
 
     getSelectValue(value) {
       this.selectValue = value;

@@ -1,8 +1,5 @@
 <template>
-  <li
-    class="col-6 col-md-4 col-lg-3 col-xl-2 cards overflow"
-    @click="getFilmId(film.id)"
-  >
+  <li class="col-6 col-md-4 col-lg-3 col-xl-2 cards overflow">
     <div
       class="content"
       :style="{
@@ -17,7 +14,7 @@
           </li>
           <li>
             TITOLO ORIGINALE:
-            {{ film.original_title }}
+            {{ getOrigTitle(film) }}
           </li>
           <li>
             LINGUA ORIGINALE:
@@ -81,10 +78,7 @@ export default {
       }
       return title.name;
     },
-    getFilmId(id) {
-      console.log(id);
-      this.$emit("getId", id);
-    },
+
     getFlagUrl(flag) {
       if (flag === "en") {
         return require("../assets/img/en.png");

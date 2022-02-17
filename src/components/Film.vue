@@ -7,7 +7,6 @@
         :key="film.id"
         :List="List"
         :film="film"
-        @click="getId(film.id)"
         :filmId="film.id"
         :genreList="genreList"
         :endP="endP"
@@ -53,10 +52,10 @@ export default {
       });
       return newArray;
     },
-    getId(id) {
-      this.$emit("getId", id);
-      console.log(id);
-    },
+    // getId(id) {
+    //   this.$emit("getId", id);
+    //   console.log(id);
+    // },
   },
 };
 </script>
