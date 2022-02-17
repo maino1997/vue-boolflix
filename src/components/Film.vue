@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h2>{{ compTitle }}</h2>
+    <h2 v-if="getArray.length > 0">{{ compTitle }}</h2>
     <ul class="row g-4">
       <Card
         v-for="film in getArray"

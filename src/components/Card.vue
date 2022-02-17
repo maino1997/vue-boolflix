@@ -78,9 +78,8 @@ export default {
     getTitle(title) {
       if (title.title) {
         return title.title;
-      } else {
-        return title.name;
       }
+      return title.name;
     },
     getFilmId(id) {
       console.log(id);

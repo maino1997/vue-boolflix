@@ -134,7 +134,7 @@ export default {
           if (!this.genreIds.includes(tvGen.id)) {
             this.genreList.push(tvGen);
           }
-          console.log(tvGen.id);
+          // console.log(tvGen.id);
         });
       });
   },
